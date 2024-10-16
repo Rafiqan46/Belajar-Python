@@ -1,16 +1,17 @@
 import os, sys
 sys.path.append(os.path.join(os.path.dirname(__file__), 'src/'))
 import random
-from kataKata import kataKata
+import string
+from kataKata import words
 
-def get_valid_word(kataKata):
-    kata = random.choice(kataKata)
-    while '-' in kata or ' ' in kata:
-        kata = random.choice(kataKata)
+def get_valid_word(words):
+    word = random.choice(words)
+    while '-' in word or ' ' in word:
+        word = random.choice(words)
 
 def hangman():
-    kata = get_valid_word(kataKata)
-    hurufKata = set(kata)
+    word = get_valid_word(words)
+    hurufKata = set(word)
     alphabet = set(string.ascii_uppercase)
     hurufDigunakan = set()
 
@@ -26,6 +27,5 @@ def hangman():
     else:
         print('Invalid Character, Coba Lagi!!')
 
-user_input = input("ketik Sesuatu: ")
-print(user_input)
+hangman()
 
