@@ -1,31 +1,38 @@
-import os, sys
-sys.path.append(os.path.join(os.path.dirname(__file__), 'src/'))
+import sys, os
+sys.path.append('src/')
 import random
-import string
-from kataKata import words
+from words import words
+import string   
 
 def get_valid_word(words):
     word = random.choice(words)
     while '-' in word or ' ' in word:
         word = random.choice(words)
 
+    return word.upper()
+
 def hangman():
     word = get_valid_word(words)
-    hurufKata = set(word)
+    word_letters = set(word)
     alphabet = set(string.ascii_uppercase)
-    hurufDigunakan = set()
+    used_letters = set()
 
-    user_huruf = input('Tebak Sebuah Huruf: ').upper
-    if user_huruf in alphabet - hurufDigunakan:
-        hurufDigunakan.add(user_huruf)
-        if user_huruf in hurufKata:
-            hurufKata.remove(user_huruf)
+    while len(word_letters) > 0:
+        print('you have used these letters: ', ' '.join(used_letters))
 
-    elif user_huruf in hurufDigunakan:
-        print("Kamu Sudah Mengunnakan Karakter itu, Coba Lagi")
+        word_list = [letter if letter in used_letters else '-' for letter in word]
+        print('current word: ', ' '.join(word_list))
+        
+        user_letter = input('Guess a letter: ').upper()
+        if user_letter in alphabet - used_letters:
+            used_letters.add(user_letter)
+            if user_letter in word_letters:
+                word_letters.remove(user_letter)
 
-    else:
-        print('Invalid Character, Coba Lagi!!')
+        elif user_letter in used_letters:
+            print('you have already used that character. please try again')
+
+        else:
+            print('Invalid character. Please try again.')
 
 hangman()
-
