@@ -1,4 +1,5 @@
 import time
+from playsound import playsound
 
 def countdown(t):
     while t:
@@ -7,9 +8,12 @@ def countdown(t):
         print(timer, end='\r')
         time.sleep(1)
         t -= 1
+        playsound('src/beep.mp3')
     
     print('Timer Completed!')
 
 t = input('Enter The time in second: ')
 
 countdown(int(t))
+
+#test membuat program meledak haha
