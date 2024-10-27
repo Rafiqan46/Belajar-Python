@@ -1,3 +1,6 @@
+#requiretmen
+#pip install playsound
+
 import time
 from playsound import playsound
 
